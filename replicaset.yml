@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: my-aap-replicaset
+  labels:
+    app: myreplicaset
+    type: fronted
+spec:
+  selector:
+    matchLabels:
+      app: mypod
+      type: my-first-app
+  replicas: 3
+  strategy:
+    type: Recreate
+    recreateParams: 
+      pre: {} 
+      mid: {}
+      post: {}
+
+  template:
+    metadata:
+      name: my-pod
+      labels:
+        app: mypod
+        type: my-first-app
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+      
+  
